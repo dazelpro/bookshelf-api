@@ -1,0 +1,24 @@
+{
+  "name": "bookshelf-api",
+  "version": "1.0.0",
+  "description": "Dicoding Submission : Zeldianto",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "lint": "eslint ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dazelpro/bookshelf-api.git"
+  },
+  "author": "ZELDIANTO",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dazelpro/bookshelf-api/issues"
+  },
+  "homepage": "https://github.com/dazelpro/bookshelf-api#readme",
+  "devDependencies": {
+    "eslint": "^7.24.0",
+    "nodemon": "^2.0.7"
+  }
+}
