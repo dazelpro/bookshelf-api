@@ -5,7 +5,7 @@
  3. Instal semua dependensi dengan perintah `npm install`
  4. Jalankan server dengan perintah `npm run start`
 
-# Eslint
+# Eslint 
 
 Eslint digunakan untuk memeriksa style dari kode yang ada didalam sebuah project. Untuk menjalankannya eksekusi perintah : `eslint ./src` atau `npm run lint`
 
