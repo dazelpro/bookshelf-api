@@ -31,7 +31,7 @@ const addBookHandler = (req, res) => {
     const id = nanoid(16);
     const insertedAt = new Date().toISOString();
     const updatedAt = insertedAt;
-    const finished = false;
+    const finished = (req.payload.readPage == req.payload.pageCount);
     const newBook = {
         name,
         year,
