@@ -72,9 +72,21 @@ const addBookHandler = (req, res) => {
 
 const getAllBookHandler = (req, res) => {
     const { name, reading, finished } = req.query;
+
     if (name) {
-        console.log('name');
+        const bookSearch = books.filter((n) => n.name.indexOf(name.toLowerCase()) > -1);
+        return {
+            status: 'success',
+            data: {
+                books: bookSearch.map((book) => ({
+                    id: book.id,
+                    name: book.name,
+                    publisher: book.publisher,
+                })),
+            },
+        };
     }
+
     if (reading) {
         if (reading == 0) {
             const bookReadingFalse = books.filter((n) => n.reading === false);
@@ -112,19 +124,24 @@ const getAllBookHandler = (req, res) => {
             },
         };
     }
+
     if (finished) {
         console.log('finished');
     }
-    // return {
-    //     status: 'success',
-    //     data: {
-    //         books: books.map((book) => ({
-    //             id: book.id,
-    //             name: book.name,
-    //             publisher: book.publisher,
-    //         })),
-    //     },
-    // };
+
+    if (!name || !reading || !finished) {
+        return {
+            status: 'success',
+            data: {
+                books: books.map((book) => ({
+                    id: book.id,
+                    name: book.name,
+                    publisher: book.publisher,
+                })),
+            },
+        };
+    }
+
     const response = res.response({
         status: 'fail',
         message: 'Buku tidak ditemukan',
