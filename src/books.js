@@ -1,1 +1,3 @@
-console.log('oke');
+const notes = [];
+
+module.exports = notes;
