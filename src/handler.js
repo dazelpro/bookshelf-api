@@ -74,7 +74,10 @@ const getAllBookHandler = (req, res) => {
     const { name, reading, finished } = req.query;
 
     if (name) {
-        const bookSearch = books.filter((n) => n.name.indexOf(name.toLowerCase()) > -1);
+        // const bookClone = [...books];
+        const bookSearch = books.filter(
+            (n) => n.name.toLowerCase().indexOf(name.toLowerCase()) > -1,
+        );
         return {
             status: 'success',
             data: {
