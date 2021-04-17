@@ -2,6 +2,22 @@ const { nanoid } = require('nanoid');
 const books = require('./books');
 
 const addBookHandler = (req, res) => {
+  if (!req.payload.name) {
+    const response = res.response({
+      status: 'fail',
+      message: 'Gagal menambahkan buku. Mohon isi nama buku',
+    });
+    response.code(500);
+    return response;
+  }
+  if (req.payload.readPage > req.payload.pageCount) {
+    const response = res.response({
+      status: 'fail',
+      message: 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount',
+    });
+    response.code(500);
+    return response;
+  }
   const {
     name,
     year,
@@ -33,7 +49,7 @@ const addBookHandler = (req, res) => {
 
   books.push(newBook);
 
-  const isSuccess = books.filter((note) => note.id === id).length > 0;
+  const isSuccess = books.filter((book) => book.id === id).length > 0;
 
   if (isSuccess) {
     const response = res.response({
