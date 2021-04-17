@@ -126,7 +126,41 @@ const getAllBookHandler = (req, res) => {
     }
 
     if (finished) {
-        console.log('finished');
+        if (finished == 0) {
+            const bookFinishFalse = books.filter((n) => n.finished === false);
+            return {
+                status: 'success',
+                data: {
+                    books: bookFinishFalse.map((book) => ({
+                        id: book.id,
+                        name: book.name,
+                        publisher: book.publisher,
+                    })),
+                },
+            };
+        } if (finished == 1) {
+            const bookFinishTrue = books.filter((n) => n.finished === true);
+            return {
+                status: 'success',
+                data: {
+                    books: bookFinishTrue.map((book) => ({
+                        id: book.id,
+                        name: book.name,
+                        publisher: book.publisher,
+                    })),
+                },
+            };
+        }
+        return {
+            status: 'success',
+            data: {
+                books: books.map((book) => ({
+                    id: book.id,
+                    name: book.name,
+                    publisher: book.publisher,
+                })),
+            },
+        };
     }
 
     if (!name || !reading || !finished) {
