@@ -70,16 +70,68 @@ const addBookHandler = (req, res) => {
     return response;
 };
 
-const getAllBookHandler = () => ({
-    status: 'success',
-    data: {
-        books: books.map((book) => ({
-            id: book.id,
-            name: book.name,
-            publisher: book.publisher,
-        })),
-    },
-});
+const getAllBookHandler = (req, res) => {
+    const { name, reading, finished } = req.query;
+    if (name) {
+        console.log('name');
+    }
+    if (reading) {
+        if (reading == 0) {
+            const bookReadingFalse = books.filter((n) => n.reading === false);
+            return {
+                status: 'success',
+                data: {
+                    books: bookReadingFalse.map((book) => ({
+                        id: book.id,
+                        name: book.name,
+                        publisher: book.publisher,
+                    })),
+                },
+            };
+        } if (reading == 1) {
+            const bookReadingTrue = books.filter((n) => n.reading === true);
+            return {
+                status: 'success',
+                data: {
+                    books: bookReadingTrue.map((book) => ({
+                        id: book.id,
+                        name: book.name,
+                        publisher: book.publisher,
+                    })),
+                },
+            };
+        }
+        return {
+            status: 'success',
+            data: {
+                books: books.map((book) => ({
+                    id: book.id,
+                    name: book.name,
+                    publisher: book.publisher,
+                })),
+            },
+        };
+    }
+    if (finished) {
+        console.log('finished');
+    }
+    // return {
+    //     status: 'success',
+    //     data: {
+    //         books: books.map((book) => ({
+    //             id: book.id,
+    //             name: book.name,
+    //             publisher: book.publisher,
+    //         })),
+    //     },
+    // };
+    const response = res.response({
+        status: 'fail',
+        message: 'Buku tidak ditemukan',
+    });
+    response.code(404);
+    return response;
+};
 
 const getBookByIdHandler = (req, res) => {
     const { id } = req.params;
